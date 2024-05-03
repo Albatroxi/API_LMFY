@@ -1,4 +1,4 @@
 Bibliotecas utilizadas - Microsoft.EntityFrameworkCore
                        - Microsoft.EntityFrameworkCore.Tools
-                       - Microsoft.EntityFrameworkCore.Desif
+                       - Microsoft.EntityFrameworkCore.Design
                        - Pomelo.EntityFrameworkCore.Mysql
