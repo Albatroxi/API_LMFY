@@ -9,6 +9,6 @@ namespace API_LMFY.Data
         {
 
         }
-        public DbSet<API_LMFY.Models.users.usersModel> usersModel { get; set; } = default!;
+        public DbSet<API_LMFY.Models.users.users> users { get; set; } = default!;
     }
 }
