@@ -21,6 +21,11 @@ namespace API_LMFY
 			builder.Services.AddEndpointsApiExplorer();
 			builder.Services.AddSwaggerGen();
 
+			builder.Services.AddMvc(options =>
+			{
+				options.SuppressAsyncSuffixInActionNames = false;
+			});
+
 			var app = builder.Build();
 
 			// Configure the HTTP request pipeline.

@@ -7,8 +7,6 @@ namespace API_LMFY.Models.users
 {
     public class users
     {
-        public int id { get; set; }
-
         [Required(ErrorMessage = "Campo Obrigatório")]
         public string nome { get; set; }
 

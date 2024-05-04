@@ -18,10 +18,9 @@ namespace API_LMFY.Controllers.users
         }
 
         [HttpGet]
-        [Route("get_UserID")]
-        public async Task<ActionResult<Models.users.users>> getUsersID(int id)
+        public async Task<ActionResult<Models.users.users>> UserEMAIL(string email)
         {
-            var usersModel = await _context.users.FindAsync(id);
+            var usersModel = await _context.users.FindAsync(email);
 
             if (usersModel == null)
             {
@@ -32,12 +31,11 @@ namespace API_LMFY.Controllers.users
         }
 
         [HttpPost]
-        [Route("register_User")]
         public async Task<ActionResult<Models.users.users>> registerUser(Models.users.users usersModel)
         {
             _context.users.Add(usersModel);
             await _context.SaveChangesAsync();
-            return CreatedAtAction("GetusersModel", new { id = usersModel.id }, usersModel);
+            return Ok();
         }
 
     }
