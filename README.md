@@ -69,6 +69,21 @@ Parâmetro - attribute - é definido o tipo de usuário para referencias as perm
                         Envia um e-mail, para o e-mail informado.
                     </td>
                 </tr>
+                <tr>
+                    <th style="width: 25%;">
+                        SMTP
+                    </th>
+                    <td>
+                        smtp-mail.outlook.com
+                </td>
+                                  <tr>
+                    <th style="width: 25%;">
+                        Porta
+                    </th>
+                    <td>
+                        587
+                </td>
+                </tr>
             </tbody>
         </table>
     </p>
