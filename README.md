@@ -38,34 +38,34 @@ Parâmetro - attribute - é definido o tipo de usuário para referencias as perm
             <tbody>
                 <tr>
                     <th style="width: 25%;">
-                        Informar o e-mail do usuário.
+                        E-mail.
                     </th>
                     <td>
-                        Verifica junto ao banco de dados se existe usuário cadastrado, com o e-mail informado.
+                        É necessário informar o e-mail do usuário.
                     </td>
                 </tr>
                 <tr>
                     <th style="width: 25%;">
-                        Afeta
+                        FindAsync(email)
                     </th>
                     <td>
-                        Entidade/Diretoria/Funcionários
+                        Verifica se existe usuário cadastrado com o e-mail informado.
                     </td>
                 </tr>
                 <tr>
                     <th style="width: 25%;">
-                        Impacto
+                        gnewpass
                     </th>
                     <td>
-                        Dificuldade em atender as exigências da LGPD pela ausência de segmentação no controle de acesso.
+                        Gera uma nova senha aleatória, capturando os 8 primeiros dígitos.
                     </td>
                 </tr>
                 <tr>
                     <th style="width: 25%;">
-                        Solução
+                        SendMail
                     </th>
                     <td>
-                        Virtualização dos dados e restrição de acesso às informações através de do sistema via autenticação e autorização dos usuários.
+                        Envia um e-mail, para o e-mail informado.
                     </td>
                 </tr>
             </tbody>
