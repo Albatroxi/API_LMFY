@@ -22,6 +22,9 @@ Parâmetro - attribute - é definido o tipo de usuário para referencias as perm
 * 2 - Administradores
 * 3 - Desenvolvedores
 
+## Criação de usuário
+
+Ao solicitar o reset da senha / Perdi a senha.
 ```http
   POST /api/users/resetPass
 ```
@@ -30,8 +33,6 @@ Parâmetro - attribute - é definido o tipo de usuário para referencias as perm
 | `email`          | `string`   | **Obrigatório**. Informar o email                         |
 
 # Descrição de atividades - Reset de Senha
-
-## Ao solicitar o reset da senha / Perdi a senha
 
 <details><summary>Solicitar nova senha - Perdi a senha</summary>
     <p>
