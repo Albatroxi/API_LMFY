@@ -32,16 +32,16 @@ Parâmetro - attribute - é definido o tipo de usuário para referencias as perm
 
 ## Ao solicitar o reset da senha / Perdi a senha
 
-<details><summary>Ao solicitar o reset de senha</summary>
+<details><summary>Solicitar nova senha - Perdi a senha</summary>
     <p>
         <table>
             <tbody>
                 <tr>
                     <th style="width: 25%;">
-                        Verifica junto ao banco de dados se existe usuário cadastrado, com o e-mail informado.
+                        Informar o e-mail do usuário.
                     </th>
                     <td>
-                        Ausência de controle das informações da entidade 
+                        Verifica junto ao banco de dados se existe usuário cadastrado, com o e-mail informado.
                     </td>
                 </tr>
                 <tr>
