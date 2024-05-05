@@ -1,6 +1,7 @@
 # Documentação da API
 
-#### Criação de usuário
+
+## Criação de usuário
 
 Ao registrar um usuário.
 
