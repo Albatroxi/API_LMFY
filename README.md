@@ -1,3 +1,17 @@
+#### Criação de usuário
+
+Ao registrar um usuário.
+
+```http
+  POST /api/users/register
+```
+| Parâmetro        | Tipo       | Descrição                                                 |
+| :--------------- | :-------   | :---------------------------------------------------      |
+| `nome`           | `string`   | **Obrigatório**. Informar o nome do usuário               |
+| `email`          | `string`   | **Obrigatório**. Informar o email - _É chave primária_    |
+| `pssW`           | `string`   | **Obrigatório**. Informar a senha - _Mínimo 6 dígitos_    |
+| `attribute`      | `integer`  | **Não Obrigatório**. Flag de definição do tipo de usuário |
+
 # Documentação da API
 
 #### Breve descrição das bibliotecas utilizadas
