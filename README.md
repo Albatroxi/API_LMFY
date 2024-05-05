@@ -21,6 +21,58 @@ Parâmetro - attribute - é definido o tipo de usuário para referencias as perm
 * 2 - Administradores
 * 3 - Desenvolvedores
 
+```http
+  POST /api/users/resetPass
+```
+| Parâmetro        | Tipo       | Descrição                                                 |
+| :--------------- | :-------   | :---------------------------------------------------      |
+| `email`          | `string`   | **Obrigatório**. Informar o email                         |
+
+# 2 - Descrição dos problemas
+
+## Problemas
+
+<details><summary>1 - Ausência de controle das informações da entidade</summary>
+    <p>
+        <table>
+            <tbody>
+                <tr>
+                    <th style="width: 25%;">
+                        Problema
+                    </th>
+                    <td>
+                        Ausência de controle das informações da entidade 
+                    </td>
+                </tr>
+                <tr>
+                    <th style="width: 25%;">
+                        Afeta
+                    </th>
+                    <td>
+                        Entidade/Diretoria/Funcionários
+                    </td>
+                </tr>
+                <tr>
+                    <th style="width: 25%;">
+                        Impacto
+                    </th>
+                    <td>
+                        Dificuldade em atender as exigências da LGPD pela ausência de segmentação no controle de acesso.
+                    </td>
+                </tr>
+                <tr>
+                    <th style="width: 25%;">
+                        Solução
+                    </th>
+                    <td>
+                        Virtualização dos dados e restrição de acesso às informações através de do sistema via autenticação e autorização dos usuários.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </p>
+</details>
+
 #### Breve descrição das bibliotecas utilizadas
 
 | Informação                                 | Descrição                                                 |
