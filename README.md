@@ -22,7 +22,7 @@ Parâmetro - attribute - é definido o tipo de usuário para referencias as perm
 * 2 - Administradores
 * 3 - Desenvolvedores
 
-## Criação de usuário
+## Perdi a senha
 
 Ao solicitar o reset da senha / Perdi a senha.
 ```http
