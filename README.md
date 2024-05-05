@@ -30,7 +30,7 @@ Parâmetro - attribute - é definido o tipo de usuário para referencias as perm
 
 # Descrição de atividades - Reset de Senha
 
-## Problemas
+## Ao solicitar o reset da senha / Perdi a senha
 
 <details><summary>Ao solicitar o reset de senha</summary>
     <p>
@@ -38,7 +38,7 @@ Parâmetro - attribute - é definido o tipo de usuário para referencias as perm
             <tbody>
                 <tr>
                     <th style="width: 25%;">
-                        Problema
+                        Verifica junto ao banco de dados se existe usuário cadastrado, com o e-mail informado.
                     </th>
                     <td>
                         Ausência de controle das informações da entidade 
