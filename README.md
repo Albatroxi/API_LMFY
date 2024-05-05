@@ -8,5 +8,6 @@
 | `Microsoft.EntityFrameworkCore.Tools`      | **Descrição 2**.                                          |
 | `Microsoft.EntityFrameworkCore.Design`     | **Descrição 3**.                                          |
 | `Pomelo.EntityFrameworkCore.Mysql`         | **Descrição 4**.                                          |
+| `System.Net.Mail`                          | **Descrição 5**.                                          |
 
 
