@@ -12,6 +12,13 @@ Ao registrar um usuário.
 | `pssW`           | `string`   | **Obrigatório**. Informar a senha - _Mínimo 6 dígitos_    |
 | `attribute`      | `integer`  | **Não Obrigatório**. Flag de definição do tipo de usuário |
 
+Parâmetro - attribute - é definido o tipo de usuário para referencias as permições de ações de cada usuário:
+
+* 0 - Alunos
+* 1 - Professores
+* 2 - Administradores
+* 3 - Desenvolvedores
+
 # Documentação da API
 
 #### Breve descrição das bibliotecas utilizadas
