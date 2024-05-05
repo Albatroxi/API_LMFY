@@ -28,11 +28,11 @@ Parâmetro - attribute - é definido o tipo de usuário para referencias as perm
 | :--------------- | :-------   | :---------------------------------------------------      |
 | `email`          | `string`   | **Obrigatório**. Informar o email                         |
 
-# 2 - Descrição dos problemas
+# Descrição de atividades - Reset de Senha
 
 ## Problemas
 
-<details><summary>1 - Ausência de controle das informações da entidade</summary>
+<details><summary>Ao solicitar o reset de senha</summary>
     <p>
         <table>
             <tbody>
