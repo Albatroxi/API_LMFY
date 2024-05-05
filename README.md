@@ -90,6 +90,9 @@ Ao solicitar o reset da senha / Perdi a senha.
     </p>
 </details>
 
+![image](https://github.com/Albatroxi/API_LMFY/assets/167586363/e0a39a25-c36c-4993-9c53-5982dc224be8)
+
+
 #### Breve descrição das bibliotecas utilizadas
 
 | Informação                                 | Descrição                                                 |
