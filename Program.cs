@@ -1,5 +1,6 @@
 
 using API_LMFY.Data;
+using API_LMFY.Helper.users;
 using Microsoft.EntityFrameworkCore;
 
 namespace API_LMFY
@@ -20,6 +21,7 @@ namespace API_LMFY
 			// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 			builder.Services.AddEndpointsApiExplorer();
 			builder.Services.AddSwaggerGen();
+			builder.Services.AddScoped<IEmails, Emails>();
 
 			builder.Services.AddMvc(options =>
 			{

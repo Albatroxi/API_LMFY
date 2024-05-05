@@ -20,5 +20,12 @@ namespace API_LMFY.Models.users
 
         public int attribute { get; set; }
 
+        public string gnewpass()
+        {
+            string newPass = Guid.NewGuid().ToString().Substring(0,8);
+            pssW = newPass;
+            return newPass;
+        }
+
     }
 }
