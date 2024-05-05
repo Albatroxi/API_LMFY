@@ -90,7 +90,8 @@ Ao solicitar o reset da senha / Perdi a senha.
     </p>
 </details>
 
-# Diagrama de atividades - _Atualizado conforme o andamento do desenvolvimento_
+# Diagrama de atividades 
+#### _Atualizado conforme o andamento do desenvolvimento_
 
 ![image](https://github.com/Albatroxi/API_LMFY/assets/167586363/e0a39a25-c36c-4993-9c53-5982dc224be8)
 
