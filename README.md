@@ -1,3 +1,5 @@
+# Documentação da API
+
 #### Criação de usuário
 
 Ao registrar um usuário.
@@ -18,8 +20,6 @@ Parâmetro - attribute - é definido o tipo de usuário para referencias as perm
 * 1 - Professores
 * 2 - Administradores
 * 3 - Desenvolvedores
-
-# Documentação da API
 
 #### Breve descrição das bibliotecas utilizadas
 
