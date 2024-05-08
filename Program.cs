@@ -1,7 +1,10 @@
 
 using API_LMFY.Data;
 using API_LMFY.Helper.users;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace API_LMFY
 {
@@ -15,7 +18,7 @@ namespace API_LMFY
 
 			/* CONEXAO COM BANCO MYSQL */
 			var connectionStringMysql = builder.Configuration.GetConnectionString("ConexaoMysql");
-			builder.Services.AddDbContext<APIContextoDB>(options => options.UseMySql(connectionStringMysql, ServerVersion.Parse("10.4.32-MariaDB")));
+			builder.Services.AddDbContext<APIContextoDB>(options => options.UseMySql(connectionStringMysql, ServerVersion.Parse("10.4.32-MariaDB")));				
 
 			builder.Services.AddControllers();
 			// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

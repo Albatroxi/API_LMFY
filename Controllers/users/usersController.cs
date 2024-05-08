@@ -1,10 +1,12 @@
 using API_LMFY.Data;
 using API_LMFY.Helper.users;
-using API_LMFY.Models.users;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using MySql.Data.MySqlClient;
-using System.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace API_LMFY.Controllers.users
 {
@@ -15,6 +17,27 @@ namespace API_LMFY.Controllers.users
         private readonly APIContextoDB _context;
         private readonly IEmails _emails;
         private readonly IConfiguration _configuration;
+
+
+        
+        private string GenerateJwtToken(Models.users.users userReference)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(_configuration["JwtSettings:Secret"]);
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                    new Claim(ClaimTypes.Email, userReference.email.ToString())
+                }),
+                Expires = DateTime.UtcNow.AddHours(1),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token); ;
+        }
 
         public usersController(APIContextoDB context, IEmails emails, IConfiguration configuration)
         {
@@ -69,29 +92,50 @@ namespace API_LMFY.Controllers.users
             return BadRequest("E-mail não encontrado !!");
         }
 
-        [HttpPost("login")]
-        public async Task<ActionResult<IEnumerable<Models.users.users>>>  loginActionAsync(string email, string password)
-        {
-            using (var connection = new MySqlConnection(_configuration.GetConnectionString("ConexaoMysql")))
-            {
-                await connection.OpenAsync();
-                //using (var command = new MySqlCommand("SELECT Id, Username, PasswordHash FROM Users WHERE Username = @Username", connection))
-                using (var command = new MySqlCommand("SELECT email, pssW FROM users WHERE email = @email AND pssW = @password", connection))
-                {
-                    command.Parameters.AddWithValue("@email", email);
-                    command.Parameters.AddWithValue("@password", password);
-                    using (var reader = await command.ExecuteReaderAsync())
-                    {
-                        if (await reader.ReadAsync())
-                        {
-                            return await _context.users.ToListAsync();
-                        }
-                    }
+        [HttpPost("changePass")]
 
-                }
+        public async Task<ActionResult<Models.users.users>> changePassW(/*HttpContext context,*/ string token, string email, string passwordNew)
+        {
+            try
+            {
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var key = Encoding.ASCII.GetBytes(_configuration["JwtSettings:Secret"]);
+
+                tokenHandler.ValidateToken(token, new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ClockSkew = TimeSpan.Zero
+                }, out SecurityToken validatedToken);
+
+                var jwtToken = (JwtSecurityToken)validatedToken;
+                //var userId = int.Parse(jwtToken.Claims.First(x => x.Type == "name").Value);
+                var userEMAIL = jwtToken.Claims.First(x => x.Type == "name").Value;
+
+
+            }
+            catch
+            {
+                return BadRequest("Autenticação não validada !");
+            }
+            return Ok("Autenticação Validada !");
+        }
+
+
+        [HttpPost("loginAction")]
+        public async Task<string> loginAction(string emailEntry, string passEntry)
+        {
+            var emailINFO = await _context.users.Where(x => x.email.ToLower() == emailEntry.ToLower()).FirstOrDefaultAsync();
+            var passwordINFO = await _context.users.Where(x => x.pssW.ToLower() == passEntry.ToLower()).FirstOrDefaultAsync();
+
+            if (emailINFO == null || passwordINFO == null)
+            {
+                return "Usuário não autorizado !";
             }
 
-            return BadRequest("E-mail/Login não encontrado !");
+            return GenerateJwtToken(emailINFO);
         }
     }
 }
