@@ -1,4 +1,4 @@
-﻿using API_LMFY.Data;
+using API_LMFY.Data;
 using API_LMFY.Helper.users;
 using API_LMFY.Models.users;
 using Microsoft.AspNetCore.Mvc;
