@@ -122,6 +122,14 @@ Ao solicitar o reset da senha / Perdi a senha.
                         É necessário informar a senha do usuário.
                     </td>
                 </tr>
+               <tr>
+                    <th style="width: 25%;">
+                        Gerar TOKEN
+                    </th>
+                    <td>
+                        O token de autorização tem validade de 1 hora.
+                    </td>
+                </tr>
             </tbody>
         </table>
     </p>
