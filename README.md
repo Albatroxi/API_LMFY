@@ -93,16 +93,16 @@ Ao solicitar o reset da senha / Perdi a senha.
 ## Realizar login
 
 ```http
-  POST /api/users/resetPass
+  POST /api/users/login
 ```
 | Parâmetro        | Tipo       | Descrição                                                 |
 | :--------------- | :-------   | :---------------------------------------------------      |
 | `email`          | `string`   | **Obrigatório**. Informar o email                         |
 | `passW`          | `string`   | **Obrigatório**. Informar a senha                         |
 
-# Descrição de atividades - Reset de Senha
+# Descrição de atividades - Login
 
-<details><summary>Solicitar nova senha - Perdi a senha</summary>
+<details><summary>Realizar login</summary>
     <p>
         <table>
             <tbody>
