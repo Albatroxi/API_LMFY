@@ -90,6 +90,51 @@ Ao solicitar o reset da senha / Perdi a senha.
     </p>
 </details>
 
+## Realizar login
+
+```http
+  POST /api/users/login
+```
+| Parâmetro        | Tipo       | Descrição                                                 |
+| :--------------- | :-------   | :---------------------------------------------------      |
+| `email`          | `string`   | **Obrigatório**. Informar o email                         |
+| `passW`          | `string`   | **Obrigatório**. Informar a senha                         |
+
+# Descrição de atividades - Login
+
+<details><summary>Realizar login</summary>
+    <p>
+        <table>
+            <tbody>
+                <tr>
+                    <th style="width: 25%;">
+                        E-mail.
+                    </th>
+                    <td>
+                        É necessário informar o e-mail do usuário.
+                    </td>
+                </tr>
+                <tr>
+                    <th style="width: 25%;">
+                        Paswword
+                    </th>
+                    <td>
+                        É necessário informar a senha do usuário.
+                    </td>
+                </tr>
+               <tr>
+                    <th style="width: 25%;">
+                        Gerar TOKEN
+                    </th>
+                    <td>
+                        O token de autorização tem validade de 1 hora.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </p>
+</details>
+
 # Diagrama de atividades 
 #### _Atualizado conforme o andamento do desenvolvimento_
 
