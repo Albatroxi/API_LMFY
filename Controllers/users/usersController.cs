@@ -1,9 +1,10 @@
 ﻿using API_LMFY.Data;
 using API_LMFY.Helper.users;
 using API_LMFY.Models.users;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MySql.Data.MySqlClient;
+using System.Configuration;
 
 namespace API_LMFY.Controllers.users
 {
@@ -13,11 +14,13 @@ namespace API_LMFY.Controllers.users
     {
         private readonly APIContextoDB _context;
         private readonly IEmails _emails;
+        private readonly IConfiguration _configuration;
 
-        public usersController(APIContextoDB context, IEmails emails)
+        public usersController(APIContextoDB context, IEmails emails, IConfiguration configuration)
         {
             _context = context;
             _emails = emails;
+            _configuration = configuration;
         }
 
         [HttpGet]
@@ -66,5 +69,29 @@ namespace API_LMFY.Controllers.users
             return BadRequest("E-mail não encontrado !!");
         }
 
+        [HttpPost("login")]
+        public async Task<ActionResult<IEnumerable<Models.users.users>>>  loginActionAsync(string email, string password)
+        {
+            using (var connection = new MySqlConnection(_configuration.GetConnectionString("ConexaoMysql")))
+            {
+                await connection.OpenAsync();
+                //using (var command = new MySqlCommand("SELECT Id, Username, PasswordHash FROM Users WHERE Username = @Username", connection))
+                using (var command = new MySqlCommand("SELECT email, pssW FROM users WHERE email = @email AND pssW = @password", connection))
+                {
+                    command.Parameters.AddWithValue("@email", email);
+                    command.Parameters.AddWithValue("@password", password);
+                    using (var reader = await command.ExecuteReaderAsync())
+                    {
+                        if (await reader.ReadAsync())
+                        {
+                            return await _context.users.ToListAsync();
+                        }
+                    }
+
+                }
+            }
+
+            return BadRequest("E-mail/Login não encontrado !");
+        }
     }
 }
