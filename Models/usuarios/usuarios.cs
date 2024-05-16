@@ -5,7 +5,7 @@ using RequiredAttribute = System.ComponentModel.DataAnnotations.RequiredAttribut
 
 namespace API_LMFY.Models.users
 {
-    public class users
+    public class usuarios
     {
         [Required(ErrorMessage = "Campo Obrigatório")]
         public string nome { get; set; }
@@ -18,7 +18,9 @@ namespace API_LMFY.Models.users
         [StringLength(Int32.MaxValue, MinimumLength = 6, ErrorMessage = "A senha deve conter ao menos 6 dígitos.")]
         public string pssW { get; set; }
 
-        public int attribute { get; set; }
+        public string token { get; set; }
+
+        public int usuarioatributo { get; set; }
 
         public string gnewpass()
         {

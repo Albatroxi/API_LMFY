@@ -21,13 +21,10 @@ namespace API_LMFY.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("API_LMFY.Models.users.users", b =>
+            modelBuilder.Entity("API_LMFY.Models.users.usuarios", b =>
                 {
                     b.Property<string>("email")
                         .HasColumnType("varchar(255)");
-
-                    b.Property<int>("attribute")
-                        .HasColumnType("int");
 
                     b.Property<string>("nome")
                         .IsRequired()
@@ -38,9 +35,16 @@ namespace API_LMFY.Migrations
                         .HasMaxLength(2147483647)
                         .HasColumnType("longtext");
 
+                    b.Property<string>("token")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("usuarioatributo")
+                        .HasColumnType("int");
+
                     b.HasKey("email");
 
-                    b.ToTable("users");
+                    b.ToTable("usuarios");
                 });
 #pragma warning restore 612, 618
         }

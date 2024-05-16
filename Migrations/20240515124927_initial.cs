@@ -5,7 +5,7 @@
 namespace API_LMFY.Migrations
 {
     /// <inheritdoc />
-    public partial class Inicial : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -14,7 +14,7 @@ namespace API_LMFY.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "users",
+                name: "usuarios",
                 columns: table => new
                 {
                     email = table.Column<string>(type: "varchar(255)", nullable: false)
@@ -23,11 +23,13 @@ namespace API_LMFY.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     pssW = table.Column<string>(type: "longtext", maxLength: 2147483647, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    attribute = table.Column<int>(type: "int", nullable: false)
+                    token = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    usuarioatributo = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_users", x => x.email);
+                    table.PrimaryKey("PK_usuarios", x => x.email);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
         }
@@ -36,7 +38,7 @@ namespace API_LMFY.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "users");
+                name: "usuarios");
         }
     }
 }

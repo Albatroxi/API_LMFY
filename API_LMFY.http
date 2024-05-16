@@ -1,6 +1,7 @@
-@API_LMFY_HostAddress = http://localhost:5260
+@API_LMFY_HostAddress = http://localhost:80
 
-GET {{API_LMFY_HostAddress}}/weatherforecast/
+GET {{API_LMFY_HostAddress}}/usuarios/loginAction
 Accept: application/json
+Accept: text/plain
 
 ###

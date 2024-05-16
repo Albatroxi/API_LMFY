@@ -12,12 +12,27 @@ namespace API_LMFY
 	{
 		public static void Main(string[] args)
 		{
-			var builder = WebApplication.CreateBuilder(args);
+            //var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
-			// Add services to the container.
+            var MyAllowSpecificOrigins = "_myAllowSpecificOrigins"; 
+            var builder = WebApplication.CreateBuilder(args);
 
-			/* CONEXAO COM BANCO MYSQL */
-			var connectionStringMysql = builder.Configuration.GetConnectionString("ConexaoMysql");
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                                  policy =>
+                                  {
+                                      policy.AllowAnyOrigin().
+                                      AllowAnyHeader().
+                                      AllowAnyMethod();
+                                  });
+            });
+
+
+            // Add services to the container.
+
+            /* CONEXAO COM BANCO MYSQL */
+            var connectionStringMysql = builder.Configuration.GetConnectionString("ConexaoMysql");
 			builder.Services.AddDbContext<APIContextoDB>(options => options.UseMySql(connectionStringMysql, ServerVersion.Parse("10.4.32-MariaDB")));				
 
 			builder.Services.AddControllers();
@@ -26,28 +41,34 @@ namespace API_LMFY
 			builder.Services.AddSwaggerGen();
 			builder.Services.AddScoped<IEmails, Emails>();
 
-			builder.Services.AddMvc(options =>
+
+            builder.Services.AddMvc(options =>
 			{
 				options.SuppressAsyncSuffixInActionNames = false;
 			});
 
-			var app = builder.Build();
+            var app = builder.Build();
 
-			// Configure the HTTP request pipeline.
-			if (app.Environment.IsDevelopment())
-			{
-				app.UseSwagger();
-				app.UseSwaggerUI();
-			}
+            // Configure the HTTP request pipeline.
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseSwagger();
+                app.UseSwaggerUI();
+            }
 
-			app.UseHttpsRedirection();
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
-			app.UseAuthorization();
+            app.UseCors(MyAllowSpecificOrigins);
+
+            app.UseHttpsRedirection();
+
+            app.UseAuthorization();
 
 
-			app.MapControllers();
+            app.MapControllers();
 
-			app.Run();
-		}
-	}
+            app.Run();
+        }
+    }
 }
