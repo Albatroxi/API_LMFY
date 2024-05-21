@@ -1,10 +1,11 @@
-
+﻿
 using API_LMFY.Data;
 using API_LMFY.Helper.users;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using API_LMFY.Controllers;
 
 namespace API_LMFY
 {
@@ -41,12 +42,6 @@ namespace API_LMFY
 			builder.Services.AddSwaggerGen();
 			builder.Services.AddScoped<IEmails, Emails>();
 
-
-            builder.Services.AddMvc(options =>
-			{
-				options.SuppressAsyncSuffixInActionNames = false;
-			});
-
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -67,6 +62,7 @@ namespace API_LMFY
 
 
             app.MapControllers();
+
 
             app.Run();
         }
