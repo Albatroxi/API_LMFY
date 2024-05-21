@@ -40,6 +40,7 @@ namespace API_LMFY.Controllers.turmas
             return turmas;
         }
 
+        /*
         [HttpPut("{id}")]
         public async Task<IActionResult> Putturmas(int id, Models.turmas.turmas turmas)
         {
@@ -68,6 +69,7 @@ namespace API_LMFY.Controllers.turmas
 
             return NoContent();
         }
+        */
 
         [HttpPost("cadastrarTurma")]
         public async Task<ActionResult<Models.turmas.turmas>> cadastrarTurma(Models.turmas.turmas turmas)
