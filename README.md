@@ -32,6 +32,17 @@ Ao solicitar o reset da senha / Perdi a senha.
 | :--------------- | :-------   | :---------------------------------------------------      |
 | `email`          | `string`   | **Obrigatório**. Informar o email                         |
 
+## Cadastrar Cursos
+
+Ao cadastrar curso.
+```http
+  POST /api/cursos/cadastrarCursos
+```
+| Parâmetro        | Tipo       | Descrição                                                 |
+| :--------------- | :-------   | :---------------------------------------------------      |
+| `Nome`           | `string`    | **Obrigatório**. Informar nome do curso                  |
+
+
 # Descrição de atividades - Reset de Senha
 
 <details><summary>Solicitar nova senha - Perdi a senha</summary>
