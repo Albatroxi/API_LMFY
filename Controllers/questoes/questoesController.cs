@@ -7,6 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using API_LMFY.Data;
 using API_LMFY.Models.questoes;
+using IdentityServer3.Core.Services;
+using System.Text;
+using System.Configuration;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API_LMFY.Controllers.questoes
 {
@@ -15,20 +20,63 @@ namespace API_LMFY.Controllers.questoes
     public class questoesController : ControllerBase
     {
         private readonly APIContextoDB _context;
+        private readonly IConfiguration _configuration;
 
-        public questoesController(APIContextoDB context)
+        private readonly IMemoryCache _cache;
+        private readonly TimeSpan _cacheExpiration;
+        private readonly byte[] _key;
+        private readonly string _issuer;
+        private readonly string _audience;
+
+        public questoesController(APIContextoDB context, IConfiguration configuration, IMemoryCache cache)
         {
             _context = context;
+            _configuration = configuration;
+
+            _cache = cache;
+            _cacheExpiration = TimeSpan.FromMinutes(int.Parse(configuration["Jwt:DurationInMinutes"]));
+            _key = Encoding.ASCII.GetBytes(configuration["Jwt:Key"]);
+            _issuer = configuration["Jwt:Issuer"];
+            _audience = configuration["Jwt:Audience"];
         }
 
-        // GET: api/questoes
+        /*
+        [HttpGet("public")]
+        public IActionResult Public()
+        {
+            return Ok("This is a public endpoint");
+        }
+
+        [Authorize]
+        [HttpGet("private")]
+        public IActionResult Private()
+        {
+            var userId = User.Identity.IsAuthenticated; // ou outro claim, ex: User.FindFirst(ClaimTypes.NameIdentifier)?.Value
+
+            return Ok($"This is a private endpoint. User ID: {userId}");
+        }
+        */
+
         [HttpGet("obterQuestoes")]
         public async Task<ActionResult<IEnumerable<Models.questoes.questoes>>> obterQuestao()
         {
             return await _context.Questoes_Provas.ToListAsync();
         }
 
-        // GET: api/questoes/5
+        [HttpGet("responderQuestoes")]
+        public async Task<ActionResult<IEnumerable<Models.questoes.questoes>>> responderQuestao(int provaID, int respostaINFO)
+        {
+            var checkPoint = await _context.Questoes_Provas.SingleOrDefaultAsync(x => x.op_correta == respostaINFO && x.idQuestoe_Provas == provaID);
+
+            if (checkPoint != null)
+            {
+                return Ok("Resposta correta");
+            }
+
+            return BadRequest("Resposta incorreta !");
+
+        }
+
         [HttpGet("obterQuestoes{id}")]
         public async Task<ActionResult<Models.questoes.questoes>> obterQuestao(int id)
         {
@@ -42,8 +90,6 @@ namespace API_LMFY.Controllers.questoes
             return questoes;
         }
 
-        // PUT: api/questoes/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         /*
         [HttpPut("{id}")]
         public async Task<IActionResult> Putquestoes(int id, Models.questoes.questoes questoes)
@@ -78,21 +124,20 @@ namespace API_LMFY.Controllers.questoes
         [HttpPost("cadastrarQuestoes")]
         public async Task<ActionResult<Models.questoes.questoes>> cadastrarQuestao(Models.questoes.questoes questoes)
         {
-            var questoes1 = await _context.Turmas.FindAsync(questoes.idQuestoe_Provas);
+            var questoes1 = await _context.Questoes_Provas.FindAsync(questoes.idQuestoe_Provas);
 
             if (questoes1 != null)
             {
-                return BadRequest("Questão já existe");
+                return BadRequest("Código já existe");
             }
 
             _context.Questoes_Provas.Add(questoes);
             await _context.SaveChangesAsync();
 
             //return CreatedAtAction("Getquestoes", new { id = questoes.idQuestoes_Provas }, questoes);
-            return Ok("Turma criada!");
+            return Ok("Questão criada!");
         }
 
-        // DELETE: api/questoes/5
         [HttpDelete("apagarQuestoes{id}")]
         public async Task<IActionResult> apagarQuestao(int id)
         {
@@ -105,7 +150,7 @@ namespace API_LMFY.Controllers.questoes
             _context.Questoes_Provas.Remove(questoes);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok("Questão apagada !");
         }
 
         private bool questoesExists(int id)

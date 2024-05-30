@@ -34,13 +34,31 @@ namespace API_LMFY
 
             /* CONEXAO COM BANCO MYSQL */
             var connectionStringMysql = builder.Configuration.GetConnectionString("ConexaoMysql");
-			builder.Services.AddDbContext<APIContextoDB>(options => options.UseMySql(connectionStringMysql, ServerVersion.Parse("10.4.32-MariaDB")));				
+			builder.Services.AddDbContext<APIContextoDB>(options => options.UseMySql(connectionStringMysql, ServerVersion.Parse("10.4.32-MariaDB")));	
+            
 
 			builder.Services.AddControllers();
 			// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 			builder.Services.AddEndpointsApiExplorer();
 			builder.Services.AddSwaggerGen();
 			builder.Services.AddScoped<IEmails, Emails>();
+
+            builder.Services.AddMemoryCache();
+
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = "Sistema de Provas",
+            ValidAudience = "Sistema de Login",
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("equipebackendprojetoarquiteturadesoftwareuninassaupituba@#!00124"))
+        };
+    });
 
             var app = builder.Build();
 
@@ -58,6 +76,7 @@ namespace API_LMFY
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();  //
             app.UseAuthorization();
 
 

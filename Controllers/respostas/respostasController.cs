@@ -21,7 +21,7 @@ namespace API_LMFY.Controllers.respostas
             _context = context;
         }
 
-        [HttpGet("obterRespostas")]
+        [HttpGet("verificarRespostas")]
         public async Task<ActionResult<IEnumerable<Models.respostas.respostas>>> obterResposta()
         {
             return await _context.Respostas_Alunos.ToListAsync();
