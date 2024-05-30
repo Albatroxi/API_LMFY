@@ -1,47 +1,115 @@
 # Documentação da API
 
-
+<details><summary><strong>Usuarios</strong></summary>
 ## Criação de usuário
+
 
 Ao registrar um usuário.
 
 ```http
-  POST /api/users/register
+  POST /api/usuarios/registrarUsuario
 ```
 | Parâmetro        | Tipo       | Descrição                                                 |
 | :--------------- | :-------   | :---------------------------------------------------      |
-| `nome`           | `string`   | **Obrigatório**. Informar o nome do usuário               |
+|`nome completo`   | `string`   | **Obrigatório**. Informar o nome completo do usuário      |
 | `email`          | `string`   | **Obrigatório**. Informar o email - _É chave primária_    |
-| `pssW`           | `string`   | **Obrigatório**. Informar a senha - _Mínimo 6 dígitos_    |
-| `attribute`      | `integer`  | **Não Obrigatório**. Flag de definição do tipo de usuário |
+| `senha`          | `string`   | **Obrigatório**. Informar a senha - _Mínimo 6 dígitos_    |
+| `perfil`         | `string`   | **Obrigatório**. Flag de definição do tipo de usuário |
 
-Parâmetro - attribute - é definido o tipo de usuário para referencias as permições de ações de cada usuário:
+Parâmetro - Perfil- é definido o tipo de usuário para referencias as permições de ações de cada usuário:
 
 * 0 - Alunos
 * 1 - Professores
 * 2 - Administradores
 * 3 - Desenvolvedores
 
-## Perdi a senha
+  
+## Login com Usuario
 
-Ao solicitar o reset da senha / Perdi a senha.
+>[!IMPORTANT]
+>É nessesario ja estar registrado no sistema
+
 ```http
-  POST /api/users/resetPass
+    POST /api/usuarios/loginAction
 ```
 | Parâmetro        | Tipo       | Descrição                                                 |
 | :--------------- | :-------   | :---------------------------------------------------      |
 | `email`          | `string`   | **Obrigatório**. Informar o email                         |
+| `senha`          | `string`   | **Obrigatório**. Informar a senha                         |
 
+
+## Esqueci a senha
+
+Ao solicitar o reset da senha / Perdi a senha.
+```http
+  POST /api/usuarios/esqueciasenhaUsuario
+```
+| Parâmetro        | Tipo       | Descrição                                                 |
+| :--------------- | :-------   | :---------------------------------------------------      |
+| `email`          | `string`   | **Obrigatório**. Informar o email                         |
+</details> 
+  
+<hr>
+
+<details><summary><strong>Cursos</strong></summary>
+  
 ## Cadastrar Cursos
 
 Ao cadastrar curso.
 ```http
   POST /api/cursos/cadastrarCursos
 ```
+| Parâmetro        | Tipo        | Descrição                                                 |
+| :--------------- | :-------    | :---------------------------------------------------      |
+| `Nome`           | `string`    | **Obrigatório**. Informar nome do curso                   |
+
+## Obter Curso
+
+Ao obter curso
+```http
+    POST /api/usuarios/loginAction
+```
 | Parâmetro        | Tipo       | Descrição                                                 |
 | :--------------- | :-------   | :---------------------------------------------------      |
-| `Nome`           | `string`    | **Obrigatório**. Informar nome do curso                  |
+| `nome`           | `string`   | **Obrigatório**. Informar o nome                          |
 
+## Apagar Curso
+ Para apagar curso 
+ 
+```http
+    POST /api/usuarios/loginAction
+```
+| Parâmetro        | Tipo       | Descrição                                                 |
+| :--------------- | :-------   | :---------------------------------------------------      |
+| `nome`           | `string`   | **Obrigatório**. Informar o nome                          |
+
+</details>
+
+<hr>
+
+<details><summary><strong>Diciplinas</strong></summary>
+
+## Obter Diciplinas
+
+ Para obter diciplinas
+ 
+```http
+    POST /api/diciplinas/obterDiciplinas
+```
+**Sem parametros**
+
+## Obter Diciplinas por {ID}
+
+ Para obter Disciplina por id
+ 
+```http
+    POST /api/diciplinas/obterDiciplinas{id}
+```
+| Parâmetro        | Tipo       | Descrição                                                 |
+| :--------------- | :-------   | :---------------------------------------------------      |
+| `id`             | `integer`  | **Obrigatório**. Informar o id                            |
+
+</details>
 
 # Descrição de atividades - Reset de Senha
 
@@ -101,15 +169,6 @@ Ao cadastrar curso.
     </p>
 </details>
 
-## Realizar login
-
-```http
-  POST /api/users/login
-```
-| Parâmetro        | Tipo       | Descrição                                                 |
-| :--------------- | :-------   | :---------------------------------------------------      |
-| `email`          | `string`   | **Obrigatório**. Informar o email                         |
-| `passW`          | `string`   | **Obrigatório**. Informar a senha                         |
 
 # Descrição de atividades - Login
 
