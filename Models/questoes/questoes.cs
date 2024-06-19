@@ -13,5 +13,10 @@ namespace API_LMFY.Models.questoes
         public string op4 { get; set; }
         public int op_correta { get; set; }
         public string dificuldade { get; set; }
+
+        public static implicit operator int(questoes? v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
