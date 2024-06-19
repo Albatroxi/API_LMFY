@@ -1,7 +1,8 @@
 # Documentação da API
 
 <details><summary><strong>Usuarios</strong></summary>
-## Criação de usuário
+
+  ## Criação de usuário
 
 
 Ao registrar um usuário.
@@ -26,7 +27,8 @@ Parâmetro - Perfil- é definido o tipo de usuário para referencias as permiç�
   
 ## Login com Usuario
 
->[!IMPORTANT]
+> IMPORTANT!
+>
 >É nessesario ja estar registrado no sistema
 
 ```http
@@ -111,9 +113,115 @@ Ao obter curso
 
 </details>
 
+<hr>
+
+<details><summary><strong>Questões</strong></summary>
+
+## Obter Questões
+
+```http
+    POST /api/questoes/obterQuestoes
+```
+Sem parametros!
+
+## Obter Questões{id}
+
+```http
+    POST /api/questoes/obterQuestoes{id}
+```
+| Parâmetro        | Tipo       | Descrição                                                 |
+| :--------------- | :-------   | :---------------------------------------------------      |
+| `id`             | `integer`  |  Informar o id                                            |
+
+## Responder Questões
+
+```http
+    POST /api/questoes/responderQuestoes
+```
+Para responder a questão:
+
+| Parâmetro         | Tipo       | Descrição                                                 |
+| :---------------  | :-------   | :---------------------------------------------------      |
+| `idQuestoe_Provas`| `integer`  |  Informar o id da questão                                 |
+| `Resposta`        | `integer`  |  Informar o numero da questão que quer responder          |
+
+## Cadastrar Questões
+
+```http
+    POST /api/questoes/cadastrarQuestoes
+```
+
+| Parâmetro         | Tipo       | Descrição                                                 |
+| :---------------  | :-------   | :---------------------------------------------------      |
+| `idQuestoe_Provas`| `integer`  | Id da questão alto encrementavel                          |
+| `enunciado`       | `string`   | Informe o enunciado da questão                            |
+| `op1`             | `string`   | Informe o texto para a auternativa 1                      |
+| `op2`             | `string`   | Informe o texto para a auternativa 2                      |
+| `op3`             | `string`   | Informe o texto para a auternativa 3                      |
+| `op4`             | `string`   | Informe o texto para a auternativa 4                      |
+| `op_correta`      | `integer`  | Informe o numero da auternativa correta                   |
+| `dificuldade`     | `integer`  | Informe o grau de dificuldade da questão <br> **( facil, medio, dificil )**|  
+
+## Deletar Questão
+
+Para deletar uma questão
+
+```http
+    POST /api/questoes/apagarQuestoes{id}
+```
+| Parâmetro         | Tipo       | Descrição                                                 |
+| :---------------  | :-------   | :---------------------------------------------------      |
+| `idQuestoe_Provas`| `integer`  | Id da que deseja deletar                                  |
+
+</details>
+
+<hr>
+
+<details><summary><strong>Turmas</strong></summary>
+
 # Descrição de atividades - Reset de Senha
 
 <details><summary>Solicitar nova senha - Perdi a senha</summary>
+
+## Obter Turmas
+
+```http
+   POST /api/turmas/obterTurmas
+```
+Sem Parametros!
+
+## Obter Turma{id}
+
+```http
+   POST /api/turmas/obterTurmas{id}
+```
+| Parâmetro         | Tipo       | Descrição                                           |
+| :---------------  | :-------   | :---------------------------------------------------|
+| `id_turma`        | `integer`  | Id da que deseja obter a turma                      |
+
+## Criar turma
+Para Criar uma turma
+
+| Parâmetro         | Tipo       | Descrição                                           |
+| :---------------  | :-------   | :---------------------------------------------------|
+| `id_turma`        | `integer`  | id da turma auto encrementavel                      |
+| `id_curso`        | `integer`  | id do curso que a turma vai ser vinculada           |
+| `nome_turma`      | `string`   | Informe o nome da turma                             |
+
+## Deletar turma
+Para deletar turma 
+```http
+DELETE /api/turmas/{id}
+```
+
+| Parâmetro         | Tipo       | Descrição                                           |
+| :---------------  | :-------   | :---------------------------------------------------|
+| `id_turma`        | `integer`  | id da turma que deseja deletar                      |
+
+
+</details> 
+
+ <hr>
     <p>
         <table>
             <tbody>
